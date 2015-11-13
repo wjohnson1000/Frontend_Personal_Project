@@ -1,0 +1,5 @@
+trending twitter topics
+refresh button
+news articles returned from trending topics
+links to articles
+return to landing page

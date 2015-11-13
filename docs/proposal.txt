@@ -1,0 +1,28 @@
+WILLIAM JOHNSON - FRONTEND PERSONAL PROJECT PROPOSAL
+
+WHO USES IT?
+Anyone who wants news relevant to the conversation.
+
+WHAT OUTPUTS DO THEY NEED?
+Full length news articles, based on topics they found in Twitter shorthand.
+
+WHAT INPUTS ARE NEEDED TO GENERATE THOSE OUTPUTS?
+The user will select from a menu of trending Twitter topics.
+
+TECHNOLOGY LIST
+1. HTML
+2. SASS
+3. CSS
+4. GULP
+5. JAVASCRIPT
+6. JQUERY
+7. ALCHEMYDATA NEWS API
+8. TWITTER REST API
+
+FEATURE LIST
+1. Display of trending Twitter topics as the landing page.
+2. Interactive buttons displaying the trending topics.
+3. When buttons are clicked, news articles load based on those trending topics.
+4. If none of the topics interest user, they can click "next topics" to reload homepage with the next set of trending topics.
+5. When a user is reading a news article, they can return to the home screen to select a new topic.
+6. When a user is reading a news article, they can return to the list of news articles based on the topic they generated. 

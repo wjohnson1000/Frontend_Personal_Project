@@ -1,0 +1,10 @@
+1. content list
+2. functionalty - USER STORIES
+	a. successfully load twitter trends
+	b. load news stories based on selected trend
+	c. hide news articles to return to trends
+	d. start a new search
+	e. store trends in local storage
+3. wireframe
+4. mark up your mock up
+5. build out style jquery
