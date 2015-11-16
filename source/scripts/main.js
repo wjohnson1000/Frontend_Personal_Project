@@ -19,24 +19,19 @@ var testTrends = [
     id:  1
     };
     var $trendContainers = $('.trend');
-      $trendContainers.each(function(i){
-        $(this).append("<p>"+ testTrends[i] +"</p>")
-      })
-  // cb.__call(
-  //     "trends_place",
-  //     params,
-  //     function (data, rate, err) {
-  //         // console.log(data[0].trends[0].name);
-  //         // var $result = $('#results');
-  //         for(i = 0; i < 6; i += 1){
-  //           // var trendingTopic = data[0].trends[i].name; ---request limit exceeded very quickly
-  //           //using testTrends in the meantime
-  //           $trendContainers[i].append("<li>"+ testTrends[i] +"</li>")
-  //           // console.log(writing)
-  //         }
-  //     },
-  //     true // this parameter required
-  // );
+      // $trendContainers.each(function(i){
+      //   $(this).append("<p>"+ testTrends[i] +"</p>")
+      // })
+  cb.__call(
+      "trends_place",
+      params,
+      function (data, rate, err) {
+          $trendContainers.each(function(i){
+            $(this).append("<p>"+ data[0].trends[i].name +"</p>")
+          })
+      },
+      true // this parameter required
+  );
 
 
 
