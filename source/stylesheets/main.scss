@@ -9,9 +9,6 @@ body{
   .container {
     width: 90%;
     margin: 0 auto;
-    // display: flex;
-    // flex-direction: row;
-    // flex-wrap: wrap;
   }
 
   .row {
@@ -23,13 +20,12 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 250px;
+    width: 30%;
     height: 250px;
+
       p {
         font-size: 300%;
         color: white;
-        word-wrap: break-word;
+        word-wrap: normal;
       }
   }
-
-}

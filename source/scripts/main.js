@@ -18,7 +18,8 @@ var testTrends = [
   var params = {
     id:  1
     };
-    var $trendContainers = $('.trend');
+
+  var $trendContainers = $('.trend');
       // $trendContainers.each(function(i){
       //   $(this).append("<p>"+ testTrends[i] +"</p>")
       // })
@@ -27,28 +28,36 @@ var testTrends = [
       params,
       function (data, rate, err) {
           $trendContainers.each(function(i){
-            $(this).append("<p>"+ data[0].trends[i].name +"</p>")
+            $(this).append("<p>" + data[0].trends[i].name + "</p>")
           })
       },
       true // this parameter required
   );
 
+  var articleTitle;
+  var articleURL;
 
 
-// TWITTER API BELOW
-// https://github.com/jublonet/codebird-js
-// var cb = new Codebird;
-// cb.__call(
-//     "oauth2_token",
-//     {},
-//     function (reply, err) {
-//         var bearer_token;
-//         if (err) {
-//             console.log("error response or timeout exceeded" + err.error);
-//         }
-//         if (reply) {
-//             bearer_token = reply.access_token;
-//         }
-//     }
-// );
+  function getNews(newsTopic){
+    $.ajax(newsTopic)
+      .done(function(data) {
+      alert("success");
+        console.log(data.result.docs[0].source.enriched.url.title);
+        console.log(data.result.docs[0].source.enriched.url.url);
+        // articleTitle = data.result.docs[0].source.enriched.url.title;
+        // articleURL = data.result.docs[0].source.enriched.url.url;
+    })
+      .fail(function() {
+        alert("error");
+    })
+  }
+
+
+  $trendContainers.on("click", "p", function(){
+    var alchemyAPIquery = "https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=5&q.enriched.url.enrichedTitle.keywords.keyword.text=" + $(this).text() + "&return=enriched.url.url,enriched.url.title&apikey=884243d26352312be01ce6cfcfb5cf276e9000a2";
+    getNews(alchemyAPIquery);
+    // $(this).append("<a href=" + articleURL + ">" + articleTitle + "</a>");
+    // console.log($(this).text());
+  })
+
 })
