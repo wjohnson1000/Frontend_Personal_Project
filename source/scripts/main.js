@@ -11,7 +11,7 @@ var testTrends = [
   cb.setBearerToken("AAAAAAAAAAAAAAAAAAAAAK97igAAAAAAL6M3uxb0OEWglYZcJpxq89e46zY%3Dt682yccM1IgilC04xfWysYugpZ2ZzmaLpIcvNTB9L6xhdjaAXC");
   // I created this CORS proxy using the codebird cors proxy source https://github.com/jublonet/codebird-cors-proxy/
   // If you comment out this line, it will use the default proxy created by the codebird author https://api.jublo.net/codebird/
-  cb.setProxy('https://codebird-proxy.herokuapp.com/');
+  // cb.setProxy('https://codebird-proxy.herokuapp.com/');
   //https://github.com/jublonet/codebird-js#requests-with-app-only-auth
   //https://github.com/jublonet/codebird-js#mapping-api-methods-to-codebird-function-calls
   // var twitterName = document.getElementsById('twitter-seacrh').val();
@@ -20,23 +20,25 @@ var testTrends = [
     };
 
   var $trendContainers = $('.trend');
-      // $trendContainers.each(function(i){
-      //   $(this).append("<p>"+ testTrends[i] +"</p>")
-      // })
-  function call(){cb.__call(
-      "trends_place",
-      params,
-      function (data, rate, err) {
-          $trendContainers.each(function(i){
-            var formattedTrend = data[0].trends[i].name.replace(/\s+/g, '').replace("#", '');
-            $(this).append("<p>" + data[0].trends[i].name + "</p>")
-            $(this).addClass(formattedTrend)
-          })
-      },
-      true // this parameter required
-    );
-  }
-  call();
+  function testCall(){$trendContainers.each(function(i){
+        $(this).append("<p>"+ testTrends[i] +"</p>")
+      })
+    }
+  testCall();
+  // function call(){cb.__call(
+  //     "trends_place",
+  //     params,
+  //     function (data, rate, err) {
+  //         $trendContainers.each(function(i){
+  //           var formattedTrend = data[0].trends[i].name.replace(/\s+/g, '').replace("#", '');
+  //           $(this).append("<p>" + data[0].trends[i].name + "</p>")
+  //           $(this).addClass(formattedTrend)
+  //         })
+  //     },
+  //     true // this parameter required
+  //   );
+  // }
+  // call();
 
 
   function getNews(alchemyAPIquery, newsTopic){
@@ -68,7 +70,8 @@ var testTrends = [
 
   $('footer').on("click", "h1", function(){
     $trendContainers.empty();
-    call();
+    testCall();
+    // call();
   })
 
 })
