@@ -1,31 +1,55 @@
 
 
-body{
+body {
     font-family: 'Lato', sans-serif;
-    background-color: rgba(25, 236, 255, 1);
+    background-color: rgba(111, 25, 255, 1);
     width: 100%;
+    color: white;
+    //height: window.screen.height;  can i get this working??
+    display: fl ex;
   }
 
-  .container {
-    width: 90%;
-    margin: 0 auto;
-  }
+main {
+  align-items: center;
+  justify-content: center;
+}
 
-  .row {
-    display: flex;
-    justify-content: space-around;
-  }
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+// h1 {
+//   font-size: 100%;
+//   // color: white;
+//   text-align: center;
+// }
 
-  .trend {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30%;
-    height: 250px;
+.row {
+  display: flex;
+  justify-content: space-around;
+}
 
-      p {
-        font-size: 300%;
-        color: white;
-        word-wrap: normal;
-      }
-  }
+.trend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 250px;
+
+    p {
+      font-size: 300%;
+      word-wrap: normal;
+    }
+
+    a {
+      font-size: 150%;
+      word-wrap: normal;
+      text-decoration: none;
+      padding: 5px 0;
+    }
+}
+
+footer {
+  font-size: 200%
+}

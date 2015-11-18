@@ -16,48 +16,59 @@ var testTrends = [
   //https://github.com/jublonet/codebird-js#mapping-api-methods-to-codebird-function-calls
   // var twitterName = document.getElementsById('twitter-seacrh').val();
   var params = {
-    id:  1
+    id:  23424977 // yahoo WOEID for USA
     };
 
   var $trendContainers = $('.trend');
       // $trendContainers.each(function(i){
       //   $(this).append("<p>"+ testTrends[i] +"</p>")
       // })
-  cb.__call(
+  function call(){cb.__call(
       "trends_place",
       params,
       function (data, rate, err) {
           $trendContainers.each(function(i){
+            var formattedTrend = data[0].trends[i].name.replace(/\s+/g, '').replace("#", '');
             $(this).append("<p>" + data[0].trends[i].name + "</p>")
+            $(this).addClass(formattedTrend)
           })
       },
       true // this parameter required
-  );
+    );
+  }
+  call();
 
-  var articleTitle;
-  var articleURL;
 
-
-  function getNews(newsTopic){
-    $.ajax(newsTopic)
+  function getNews(alchemyAPIquery, newsTopic){
+    $.ajax(alchemyAPIquery)
       .done(function(data) {
-      alert("success");
-        console.log(data.result.docs[0].source.enriched.url.title);
-        console.log(data.result.docs[0].source.enriched.url.url);
-        // articleTitle = data.result.docs[0].source.enriched.url.title;
-        // articleURL = data.result.docs[0].source.enriched.url.url;
+        for (var i = 0; i < 3; i++) {
+          // console.log(data.result.docs[i].source.enriched.url.title);
+          // console.log(data.result.docs[i].source.enriched.url.url);
+          var articleTitle = data.result.docs[i].source.enriched.url.title;
+          var articleURL = data.result.docs[i].source.enriched.url.url;
+          var newsLink = $("<a href=" + articleURL + ">" + articleTitle + "</a>");
+          $("." + newsTopic.replace(/\s+/g, '') + "> p").hide();
+          $("." + newsTopic.replace(/\s+/g, '')).append(newsLink);
+        }
     })
       .fail(function() {
         alert("error");
     })
   }
-
+//could add a 2nd arg to "getNews" that would pass the class where there was a click
+//this would include the DOM manipulation in the ajax request
+//could add classes based on trends above, or just do 1-6
 
   $trendContainers.on("click", "p", function(){
-    var alchemyAPIquery = "https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=5&q.enriched.url.enrichedTitle.keywords.keyword.text=" + $(this).text() + "&return=enriched.url.url,enriched.url.title&apikey=884243d26352312be01ce6cfcfb5cf276e9000a2";
-    getNews(alchemyAPIquery);
-    // $(this).append("<a href=" + articleURL + ">" + articleTitle + "</a>");
-    // console.log($(this).text());
+    var newsTopic = $(this).text().replace("#",'');
+    var alchemyAPIquery = "https://gateway-a.watsonplatform.net/calls/data/GetNews?outputMode=json&start=now-1d&end=now&count=5&q.enriched.url.enrichedTitle.keywords.keyword.text=" + newsTopic + "&return=enriched.url.url,enriched.url.title&apikey=884243d26352312be01ce6cfcfb5cf276e9000a2";
+    getNews(alchemyAPIquery, newsTopic);
+  })
+
+  $('footer').on("click", "h1", function(){
+    $trendContainers.empty();
+    call();
   })
 
 })
