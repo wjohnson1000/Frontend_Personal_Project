@@ -30,13 +30,12 @@ var testTrends = [
       params,
       function (data, rate, err) {
         $trendContainers.each(function(i){
-          if (err = true){
+          if (!err){
             var formattedTrend = data[0].trends[i].name.replace(/\s+/g, '').replace("#", '');
             $(this).append("<p>" + data[0].trends[i].name + "</p>");
             $(this).addClass(formattedTrend);
             localStorage.setItem("topic" + i, data[0].trends[i].name);
             localStorage.setItem("class" + i, formattedTrend);
-
           } else {
             $(this).append("<p>" + localStorage.getItem("topic" + i) + "</p>");
             $(this).addClass(localStorage.getItem("class" + i));
@@ -66,6 +65,11 @@ var testTrends = [
         alert("error");
     })
   }
+
+  $trendContainers.on("click", "a", function(event){
+    event.preventDefault();
+    window.open($(this).attr("href"));
+  })
 //window.open, window.location.href for new tabs
 
 
