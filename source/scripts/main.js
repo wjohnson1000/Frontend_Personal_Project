@@ -20,25 +20,33 @@ var testTrends = [
     };
 
   var $trendContainers = $('.trend');
-  function testCall(){$trendContainers.each(function(i){
-        $(this).append("<p>"+ testTrends[i] +"</p>")
-      })
-    }
-  testCall();
-  // function call(){cb.__call(
-  //     "trends_place",
-  //     params,
-  //     function (data, rate, err) {
-  //         $trendContainers.each(function(i){
-  //           var formattedTrend = data[0].trends[i].name.replace(/\s+/g, '').replace("#", '');
-  //           $(this).append("<p>" + data[0].trends[i].name + "</p>")
-  //           $(this).addClass(formattedTrend)
-  //         })
-  //     },
-  //     true // this parameter required
-  //   );
-  // }
-  // call();
+  // function testCall(){$trendContainers.each(function(i){
+  //       $(this).append("<p>"+ testTrends[i] +"</p>")
+  //     })
+  //   }
+  // testCall();
+  function call(){cb.__call(
+      "trends_place",
+      params,
+      function (data, rate, err) {
+        $trendContainers.each(function(i){
+          if (err = true){
+            var formattedTrend = data[0].trends[i].name.replace(/\s+/g, '').replace("#", '');
+            $(this).append("<p>" + data[0].trends[i].name + "</p>");
+            $(this).addClass(formattedTrend);
+            localStorage.setItem("topic" + i, data[0].trends[i].name);
+            localStorage.setItem("class" + i, formattedTrend);
+
+          } else {
+            $(this).append("<p>" + localStorage.getItem("topic" + i) + "</p>");
+            $(this).addClass(localStorage.getItem("class" + i));
+          }
+        })
+      },
+      true // this parameter required
+    );
+  }
+  call();
 
 
   function getNews(alchemyAPIquery, newsTopic){
@@ -58,9 +66,8 @@ var testTrends = [
         alert("error");
     })
   }
-//could add a 2nd arg to "getNews" that would pass the class where there was a click
-//this would include the DOM manipulation in the ajax request
-//could add classes based on trends above, or just do 1-6
+//window.open, window.location.href for new tabs
+
 
   $trendContainers.on("click", "p", function(){
     var newsTopic = $(this).text().replace("#",'');
@@ -70,8 +77,8 @@ var testTrends = [
 
   $('footer').on("click", "h1", function(){
     $trendContainers.empty();
-    testCall();
-    // call();
+    // testCall();
+    call();
   })
 
 })
